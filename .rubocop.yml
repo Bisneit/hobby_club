@@ -1,0 +1,53 @@
+Rails:
+  Enabled: true
+
+AllCops:
+  TargetRubyVersion: 2.4
+  TargetRailsVersion: 5.1
+  DisplayCopNames: true
+  Exclude:
+    - 'bin/*'
+    - 'db/schema.rb'
+    - 'vendor/**/*'
+    - 'config/initializers/devise.rb'
+
+CaseIndentation:
+  IndentOneStep: true
+
+Lint/AmbiguousBlockAssociation:
+  Enabled: false
+
+Metrics/AbcSize:
+  Max: 21
+
+Metrics/BlockLength:
+  Exclude:
+    - 'config/routes.rb'
+    - 'spec/**/*_spec.rb'
+    - 'spec/factories/**/*'
+
+Metrics/LineLength:
+  Max: 125
+
+Metrics/MethodLength:
+  Max: 20
+
+Style/Documentation:
+  Enabled: false
+
+Layout/DotPosition:
+  EnforcedStyle: trailing
+
+Style/Lambda:
+  EnforcedStyle: literal
+
+Style/MixinGrouping:
+  Enabled: false
+
+Layout/MultilineMethodCallIndentation:
+  EnforcedStyle: indented
+  IndentationWidth: 2
+
+Layout/SpaceInsideHashLiteralBraces:
+  EnforcedStyle: no_space
+  EnforcedStyleForEmptyBraces: no_space
