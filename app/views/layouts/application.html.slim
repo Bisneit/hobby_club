@@ -1,0 +1,24 @@
+doctype html
+html
+  head
+    title = HobbyClub
+    = csrf_meta_tags
+    = csp_meta_tag
+
+    = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
+    = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
+    = yield :vue_app
+
+  body
+    div
+      p.notice = notice
+      p.alert = alert
+
+      - if !user_signed_in?
+        = link_to 'Sign Up', new_user_registration_path
+        = link_to 'Sign In', new_user_session_path
+      - else
+        = link_to 'Log Out', destroy_user_session_path, :method => :delete
+
+    = yield
+    
