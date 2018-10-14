@@ -287,4 +287,7 @@ Devise.setup do |config|
   # ActiveSupport.on_load(:devise_failure_app) do
   #   include Turbolinks::Controller
   # end
+
+  Devise::RegistrationsController.layout 'welcome'
+  Devise::SessionsController.layout 'welcome'
 end

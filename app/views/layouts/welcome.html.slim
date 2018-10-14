@@ -1,0 +1,18 @@
+doctype html
+html
+  head
+    title = HobbyClub
+    = csrf_meta_tags
+    = csp_meta_tag
+
+    = stylesheet_link_tag    'welcome', media: 'all', 'data-turbolinks-track': 'reload'
+    = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
+    = yield :vue_app
+
+  body
+    .page
+      .split.left
+      .split.right
+        .centered
+          = yield
+    
