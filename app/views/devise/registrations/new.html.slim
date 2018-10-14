@@ -1,0 +1,28 @@
+.container-login100
+  = form_for(resource, as: resource_name, url: registration_path(resource_name), html: { class: 'login100-form' }) do |f|
+    = devise_error_messages!
+    span.login100-form-title
+      | Sign UP
+    .wrap-input100.rs1-wrap-input100.
+      = f.text_field :first_name, class: 'input100', placeholder: 'First name'
+      span.focus-input100
+    .wrap-input100.rs1-wrap-input100.
+      = f.text_field :last_name, class: 'input100', placeholder: 'Last name'
+      span.focus-input100
+    .wrap-input100.rs1-wrap-input100.
+      = f.email_field :email, class: 'input100', placeholder: 'Email'
+      span.focus-input100
+    .wrap-input100.rs1-wrap-input100.
+      = f.text_field :phone, class: 'input100', placeholder: 'Phone'
+      span.focus-input100
+    .wrap-input100.rs2-wrap-input100
+      = f.password_field :password, autocomplete: "new-password", placeholder: 'Password', class: 'input100'
+      span.focus-input100
+    .wrap-input100.rs2-wrap-input100
+      = f.password_field :password_confirmation, autocomplete: "new-password", placeholder: 'Password confirmation', class: 'input100'
+      span.focus-input100
+    .container-login100-form-btn
+      = f.submit "sign up", class: 'login100-form-btn'
+    .forgot
+      = link_to "Didn't receive confirmation instructions?", new_confirmation_path(resource_name), class: 'txt2'
+  = link_to "Log in", new_session_path(resource_name), class: 'txt3'
