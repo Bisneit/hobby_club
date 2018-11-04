@@ -5,7 +5,7 @@ const inDevServer = process.argv.find(v => v.includes('webpack-dev-server'))
 const extractCSS = !(inDevServer && (devServer && devServer.hmr)) || isProduction
 
 module.exports = {
-  test: /\.vue(\.erb)?$/,
+  test: /\.vue(\.slim)?$/,
   use: [{
     loader: 'vue-loader',
     options: { extractCSS }

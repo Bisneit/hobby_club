@@ -11,14 +11,26 @@ html
 
   body
     div
-      p.notice = notice
-      p.alert = alert
-
-      - if !user_signed_in?
-        = link_to 'Sign Up', new_user_registration_path
-        = link_to 'Sign In', new_user_session_path
-      - else
-        = link_to 'Log Out', destroy_user_session_path, :method => :delete
+      = render 'layouts/messages'
+      nav.navbar.navbar-expand-lg.navbar-dark.bg-primary style="background-color: #DF691A !important"
+        a.navbar-brand href="#"  Hobby Club
+        button.navbar-toggler aria-controls="navbarColor01" aria-expanded="false" aria-label=("Toggle navigation") data-target="#navbarColor01" data-toggle="collapse" type="button" 
+          span.navbar-toggler-icon
+        #navbarColor01.collapse.navbar-collapse
+          ul.navbar-nav.mr-auto
+            - if user_signed_in?
+              li.nav-item.active
+                a.nav-link href="#"  Мои Группы
+          form.form-inline.my-2.my-lg-0
+            ul.navbar-nav.mr-auto
+              - if !user_signed_in?
+                li.nav-item.active
+                  = link_to 'Регистрация', new_user_registration_path, class: 'nav-link'
+                li.nav-item.active
+                  = link_to 'Вход', new_user_session_path, class: 'nav-link'
+              - else
+                li.nav-item.active
+                  = link_to 'Выход', destroy_user_session_path, :method => :delete, class: 'nav-link'
 
     = yield
     
