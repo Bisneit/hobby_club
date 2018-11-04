@@ -1,0 +1,11 @@
+= form_with scope: :group, url: groups_path do |f|
+  | Avatar
+  = f.file_field :avatar
+  br
+  | Name
+  = f.text_field :name
+  br
+  | Description
+  = f.text_field :description
+  br
+  = f.submit "Создать"

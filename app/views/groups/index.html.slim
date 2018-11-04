@@ -1,0 +1,15 @@
+- @groups.each do |group|
+	.group-item
+		.info
+			.title
+				.group-ttitle
+					.ttitle-row
+						.ttitle-cell
+							= group.name
+			.content
+				.m10 &nbsp;
+				dt Описание
+				dl.inform-block
+					= group.description
+		.avatar
+			= image_tag(group.avatar.url(:medium))
