@@ -9,10 +9,14 @@ class GroupsController < ApplicationController
     @group = Group.new
   end
 
+  def show
+    @group = Group.find(params[:id])
+  end
+
   def create
     @group = Group.new(permitted_params)
 
-    if @group.save 
+    if @group.save
       redirect_to groups_path
     else
       render 'new'
