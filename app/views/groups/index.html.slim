@@ -11,6 +11,6 @@
 					.m10 &nbsp;
 					dt Описание
 					dl.inform-block
-						= group.description
+						= Rinku.auto_link(group.description, :all, 'target="_blank"').html_safe
 			.avatar
 				= image_tag(group.avatar.url(:medium))
