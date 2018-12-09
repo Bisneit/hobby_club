@@ -10,8 +10,8 @@
         h2.mt-4 Чем мы занимаемся
         p Lorem ipsum dolor sit amet, consectetur adipisicing elit. A deserunt neque tempore recusandae animi soluta quasi? Asperiores rem dolore eaque vel, porro, soluta unde debitis aliquam laboriosam. Repellat explicabo, maiores!
         p Lorem ipsum dolor sit amet, consectetur adipisicing elit. Omnis optio neque consectetur consequatur magni in nisi, natus beatae quidem quam odit commodi ducimus totam eum, alias, adipisci nesciunt voluptate. Voluptatum.
-        p
-         .group-invite-button href="#"  Call to Action
+        - if current_user && current_user.participants.where(user: current_user, group: @group).blank?
+          = link_to 'Присоединиться', group_participants_path({group_id: @group.id, user_id: current_user.id }), method: :post, class: 'group-invite-button'
       .col-sm-4
         h2.mt-4 Свяжитесь с нами
         address
@@ -20,6 +20,8 @@
         address
           strong Мы в вконтакте
           = link_to ' vk.com/vlajkee', "http://vk.com/vlajkee"
+        - if current_user && current_user.participants.where(user: current_user, group: @group).exists?
+          = link_to 'Наши участники', group_participants_path(group_id: @group.id), method: :get, class: 'group-participants-button'
 
     .row
       .col-sm-4.my-4
@@ -46,6 +48,4 @@
             p.card-text Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sapiente esse necessitatibus neque.
           .card-footer
             a.btn.btn-primary href="#"  Find Out More!
-  footer.py-4.group-footer
-    .container
-      p.m-0.text-center.text-white Copyright &copy; Your Website 2018
+

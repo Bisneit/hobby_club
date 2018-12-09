@@ -176,7 +176,7 @@ input.input100
   -o-transform: scale(1)
   transform: scale(1)
 
-.login100-form-btn, .group-invite-button
+.login100-form-btn, .group-invite-button, .index-invite-button, .group-participants-button
   display: flex
   justify-content: center
   align-items: center
@@ -201,6 +201,15 @@ input.input100
 
 .group-invite-button
   width: 30%
+  &:hover
+    text-decoration: none
+    color: white
+
+.index-invite-button, .group-participants-button
+  width: 50%
+  &:hover
+    text-decoration: none
+    color: white
 
 .avatar-block
   width: 100%
@@ -234,3 +243,20 @@ input.input100
 
 .group-footer
   background-color: #DF691A
+  position: absolute
+  left: 0
+  bottom: 0
+  width: 100%
+
+.pagination
+  margin-bottom: 15px
+  left: 0
+  bottom: 0
+  width: 100%
+
+.index-image
+  text-align: center
+
+.index-group-description
+  line-height: 1
+
