@@ -1,4 +1,14 @@
 GIT
+  remote: https://github.com/activerecord-hackery/ransack.git
+  revision: 322a014cd4c491d1832dd371e1f32ffd247b14ba
+  specs:
+    ransack (2.1.1)
+      actionpack (>= 5.0)
+      activerecord (>= 5.0)
+      activesupport (>= 5.0)
+      i18n
+
+GIT
   remote: https://github.com/galetahub/ckeditor.git
   revision: dc2cef2c2c3358124ebd86ca2ef2335cc898b41f
   specs:
@@ -223,11 +233,6 @@ GEM
       thor (>= 0.19.0, < 2.0)
     rainbow (3.0.0)
     rake (12.3.1)
-    ransack (2.0.1)
-      actionpack (>= 5.0)
-      activerecord (>= 5.0)
-      activesupport (>= 5.0)
-      i18n
     rb-fsevent (0.10.3)
     rb-inotify (0.9.10)
       ffi (>= 0.5.0, < 2)
@@ -308,6 +313,9 @@ GEM
     websocket-driver (0.7.0)
       websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.3)
+    will_paginate (3.1.6)
+    will_paginate-bootstrap4 (0.2.2)
+      will_paginate (~> 3.0, >= 3.0.0)
     xpath (3.1.0)
       nokogiri (~> 1.8)
 
@@ -332,6 +340,7 @@ DEPENDENCIES
   pg (>= 0.18, < 2.0)
   puma (~> 3.11)
   rails (~> 5.2.1)
+  ransack!
   rinku
   rubocop
   sass-rails (~> 5.0)
@@ -345,6 +354,8 @@ DEPENDENCIES
   vuejs-rails
   web-console (>= 3.3.0)
   webpacker
+  will_paginate
+  will_paginate-bootstrap4
 
 RUBY VERSION
    ruby 2.5.0p0

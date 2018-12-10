@@ -24,6 +24,9 @@ gem 'turbolinks', '~> 5'
 gem 'uglifier', '>= 1.3.0'
 gem 'webpacker'
 gem 'ckeditor', github: 'galetahub/ckeditor'
+gem 'ransack', github: 'activerecord-hackery/ransack'
+gem 'will_paginate'
+gem 'will_paginate-bootstrap4'
 
 group :development, :test do
   gem 'byebug', platforms: %i[mri mingw x64_mingw]
