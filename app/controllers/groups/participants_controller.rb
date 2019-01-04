@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class GroupParticipantsController < ApplicationController
+class Groups::ParticipantsController < ApplicationController
   def index
     group_id = params[:group_id] || params[:q][:group_id]
     group = Group.find(group_id)
@@ -15,17 +15,18 @@ class GroupParticipantsController < ApplicationController
     if user.participants.where(group: group).exists?
       flash[:notice] = "Вы уже вступили в эту группу"
     elsif user && group
-      GroupParticipant.create(group: group, user: user)
+      Groups::Participant.create(group: group, user: user)
       flash[:success] = "Вы успешно вступили в группу"
     else
       flash[:notice] = "Что то пошло не так"
     end
-    redirect_to group_path(group.id)
+    redirect_back fallback_location: root_path
   end
 
   def destroy
     group = Group.find_by(id: params[:id])
     group.participants.where(user: current_user).delete_all
-    redirect_to group_path(group.id)
+    flash[:success] = "Вы покинули группу"
+    redirect_back fallback_location: root_path
   end
 end

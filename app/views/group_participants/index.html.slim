@@ -3,7 +3,7 @@
     .d-flex.justify-content-between
       h1.my-4
         small Наши участники
-      = search_form_for @filters, url: group_participants_path do |f|
+      = search_form_for @filters, url: groups_participants_path do |f|
         = f.hidden_field :group_id, value: group_id
         .filters
           = f.search_field :user_first_name_or_user_last_name_cont, type: 'text', placeholder: 'Поиск', class: 'search'
@@ -17,7 +17,7 @@
               img.card-img-top alt="" src="http://placehold.it/700x500" /
             .card-body
               h4.card-title
-                = link_to [participant.first_name, participant.last_name].join(' '), group_participant_path(participant), method: :get
+                = link_to [participant.first_name, participant.last_name].join(' '), groups_participant_path(participant), method: :get
               p.card-text Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet numquam aspernatur eum quasi sapiente nesciunt?
 
     .pagination.justify-content-center = will_paginate @participants, renderer: WillPaginate::ActionView::BootstrapLinkRenderer

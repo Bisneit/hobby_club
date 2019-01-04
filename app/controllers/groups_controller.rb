@@ -8,7 +8,7 @@ class GroupsController < ApplicationController
               else
                 Group.with_public_access
               end
-    @groups = result.paginate(page: params[:page], per_page: 2)
+    @groups = result.paginate(page: params[:page], per_page: 10)
   end
 
   def new

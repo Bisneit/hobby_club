@@ -1,0 +1,12 @@
+.container-login100
+  = form_for(resource, as: resource_name, url: confirmation_path(resource_name), html: { method: :post, class: 'login100-form' }) do |f|
+    = devise_error_messages!
+    span.login100-form-title
+      | Отправить письмо о подтверждении регистрации
+    .wrap-input100
+      = f.email_field :email, class: 'input100', placeholder: 'Email'
+      span.focus-input100
+    .container-login100-form-btn
+      = f.submit "Отправить", class: 'login100-form-btn'
+    .forgot
+      = link_to "Войти", new_session_path(resource_name), class: 'txt3'
