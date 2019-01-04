@@ -3,18 +3,17 @@ html
   head
     title = HobbyClub
     = csrf_meta_tags
-    = csp_meta_tag
 
-    = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
-    = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
-    = yield :vue_app
+    = stylesheet_link_tag 'application', media: 'all'
+    = stylesheet_pack_tag 'application', media: 'all'
+    = javascript_pack_tag 'application'
 
   body
     div
       = render 'layouts/messages'
       nav.navbar.navbar-expand-lg.navbar-dark.bg-primary style="background-color: #DF691A !important"
         = link_to 'Hobby Club', groups_path, class: 'navbar-brand'
-        button.navbar-toggler aria-controls="navbarColor01" aria-expanded="false" aria-label=("Toggle navigation") data-target="#navbarColor01" data-toggle="collapse" type="button" 
+        button.navbar-toggler aria-controls="navbarColor01" aria-expanded="false" aria-label=("Toggle navigation") data-target="#navbarColor01" data-toggle="collapse" type="button"
           span.navbar-toggler-icon
         #navbarColor01.collapse.navbar-collapse
           ul.navbar-nav.mr-auto
@@ -35,4 +34,3 @@ html
                   = link_to 'Выход', destroy_user_session_path, :method => :delete, class: 'nav-link'
 
     = yield
-    
