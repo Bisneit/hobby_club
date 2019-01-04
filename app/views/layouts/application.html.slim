@@ -3,9 +3,11 @@ html
   head
     title = HobbyClub
     = csrf_meta_tags
+    = csp_meta_tag
 
     = stylesheet_link_tag 'application', media: 'all'
     = stylesheet_pack_tag 'application', media: 'all'
+    = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
     = javascript_pack_tag 'application'
 
   body
@@ -19,7 +21,7 @@ html
           ul.navbar-nav.mr-auto
             - if user_signed_in?
               li.nav-item.active
-                a.nav-link href="#"  Мои Группы
+                = link_to 'Мои Группы', groups_path({my_groups: true}), class: 'nav-link'
               li.nav-item.active
                 = link_to 'Создать Группу', new_group_path, class: 'nav-link'
           form.form-inline.my-2.my-lg-0

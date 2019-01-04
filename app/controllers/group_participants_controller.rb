@@ -22,4 +22,10 @@ class GroupParticipantsController < ApplicationController
     end
     redirect_to group_path(group.id)
   end
+
+  def destroy
+    group = Group.find_by(id: params[:id])
+    group.participants.where(user: current_user).delete_all
+    redirect_to group_path(group.id)
+  end
 end

@@ -7,14 +7,14 @@
         = f.hidden_field :group_id, value: group_id
         .filters
           = f.search_field :user_first_name_or_user_last_name_cont, type: 'text', placeholder: 'Поиск', class: 'search'
-          = f.submit
+          = f.button :submit, class: 'simple-btn'
 
     .row
       - @participants.each do |participant|
         .col-lg-3.col-md-4.col-sm-6.portfolio-item
           .card.h-100
             a href="#"
-              img.card-img-top alt="" src="http://placehold.it/700x400" /
+              img.card-img-top alt="" src="http://placehold.it/700x500" /
             .card-body
               h4.card-title
                 = link_to [participant.first_name, participant.last_name].join(' '), group_participant_path(participant), method: :get
