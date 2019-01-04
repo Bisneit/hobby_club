@@ -23,8 +23,11 @@
         address
           strong Мы в вконтакте
           = link_to ' vk.com/vlajkee', "http://vk.com/vlajkee"
-        - if current_user && current_user.participants.where(user: current_user, group: @group).exists?
-          = link_to 'Наши участники', groups_participants_path(group_id: @group.id), method: :get, class: 'group-participants-button'
+        .group-settings-block
+          - if current_user && current_user.participants.where(user: current_user, group: @group).exists?
+            = link_to 'Наши участники', groups_participants_path(group_id: @group.id), method: :get, class: 'group-participants-button'
+            = link_to '#', class: 'settings-icon'
+              = fa_icon 'cog', class: "fa-3x"
 
     .row
       .col-sm-4.my-4

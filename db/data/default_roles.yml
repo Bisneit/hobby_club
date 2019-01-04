@@ -1,0 +1,6 @@
+- name: 'Admin'
+  description: 'Создатель группы'
+- name: 'Moderator'
+  description: 'Модератор группы'
+- name: 'User'
+  description: 'Участник группы'
