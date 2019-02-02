@@ -27,6 +27,7 @@ gem 'will_paginate'
 gem 'will_paginate-bootstrap4'
 gem 'carrierwave', '~> 1.0'
 gem "rmagick"
+gem "rack", ">= 2.0.6"
 
 group :development, :test do
   gem 'byebug', platforms: %i[mri mingw x64_mingw]
