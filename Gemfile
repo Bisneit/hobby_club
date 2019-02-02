@@ -13,7 +13,6 @@ gem 'devise'
 gem "font-awesome-rails"
 gem 'jbuilder', '~> 2.5'
 gem 'jquery-rails'
-gem "paperclip", ">= 5.2.0"
 gem 'pg', '>= 0.18', '< 2.0'
 gem 'puma', '~> 3.11'
 gem 'rails', '~> 5.2.1'
@@ -26,6 +25,8 @@ gem 'ckeditor', github: 'galetahub/ckeditor'
 gem 'ransack', github: 'activerecord-hackery/ransack'
 gem 'will_paginate'
 gem 'will_paginate-bootstrap4'
+gem 'carrierwave', '~> 1.0'
+gem "rmagick"
 
 group :development, :test do
   gem 'byebug', platforms: %i[mri mingw x64_mingw]

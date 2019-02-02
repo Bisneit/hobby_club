@@ -1,0 +1,8 @@
+<%= image_tag @group.avatar.url, :id => "cropbox" %>
+
+<%= form_for @group do |f| %>
+  <% %w[x y w h].each do |attribute| %>
+    <%= f.text_field "crop_#{attribute}", :id => attribute %><br>
+  <% end %>
+  <p><%= f.submit "Crop" %></p>
+<% end %>

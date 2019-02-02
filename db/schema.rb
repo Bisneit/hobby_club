@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_01_04_205114) do
+ActiveRecord::Schema.define(version: 2019_02_02_123631) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -45,7 +45,6 @@ ActiveRecord::Schema.define(version: 2019_01_04_205114) do
     t.string "data_file_name", null: false
     t.string "data_content_type"
     t.integer "data_file_size"
-    t.string "data_fingerprint"
     t.string "type", limit: 30
     t.integer "width"
     t.integer "height"
@@ -80,10 +79,7 @@ ActiveRecord::Schema.define(version: 2019_01_04_205114) do
     t.boolean "public", default: true
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "avatar_file_name"
-    t.string "avatar_content_type"
-    t.integer "avatar_file_size"
-    t.datetime "avatar_updated_at"
+    t.string "avatar"
   end
 
   create_table "users", force: :cascade do |t|

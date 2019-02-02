@@ -7,7 +7,6 @@ Group.all.each do |group|
   if group.roles.blank?
     data = YAML.load_file(Rails.root.join('db', 'data', 'default_roles.yml'))
     data.each do |role|
-      byebug
       group.roles.create!(name: role['name'], description: role['description'])
     end
   end

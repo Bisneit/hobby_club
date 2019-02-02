@@ -23,15 +23,37 @@ class GroupsController < ApplicationController
     @group = Group.new(permitted_params)
 
     if @group.save
-      redirect_to groups_path
+      data = YAML.load_file(Rails.root.join('db', 'data', 'default_roles.yml'))
+      data.each do |role|
+        @group.roles.create!(name: role['name'], description: role['description'])
+      end
+
+      if permitted_params[:avatar].blank?
+        redirect_to groups_path
+      else
+        render :action => "crop"
+      end
     else
       render 'new'
+    end
+  end
+
+  def update
+    @group = Group.find(params[:id])
+
+    if @group.update_attributes(permitted_params)
+      flash[:notice] = "Группа успешно обновлена"
+      if permitted_params[:avatar].blank?
+        redirect_to group_path(@group.id)
+      else
+        render :action => "crop"
+      end
     end
   end
 
   private
 
   def permitted_params
-    params.require(:group).permit(:name, :description, :avatar, :my_groups)
+    params.require(:group).permit(:name, :description, :avatar, :my_groups, :crop_x, :crop_y, :crop_w, :crop_h)
   end
 end
