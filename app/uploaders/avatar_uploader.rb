@@ -19,10 +19,10 @@ class AvatarUploader < CarrierWave::Uploader::Base
   def crop
     if model.crop_x.present?
       manipulate! do |img|
-        x = model.crop_x.to_i
-        y = model.crop_y.to_i
-        w = model.crop_w.to_i
-        h = model.crop_h.to_i
+        x = (model.crop_x.to_f * model.coef_w.to_f).to_i
+        y = (model.crop_y.to_f * model.coef_h.to_f).to_i
+        w = (model.crop_w.to_i * model.coef_w.to_f).to_i
+        h = (model.crop_h.to_i * model.coef_h.to_f).to_i
         img.crop!(x,y,w,h)
       end
     end

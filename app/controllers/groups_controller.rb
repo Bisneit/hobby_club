@@ -54,6 +54,6 @@ class GroupsController < ApplicationController
   private
 
   def permitted_params
-    params.require(:group).permit(:name, :description, :avatar, :my_groups, :crop_x, :crop_y, :crop_w, :crop_h)
+    params.require(:group).permit(:name, :description, :avatar, :my_groups, :crop_x, :crop_y, :crop_w, :crop_h, :coef_w, :coef_h)
   end
 end

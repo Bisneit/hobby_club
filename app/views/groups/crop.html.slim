@@ -1,9 +1,16 @@
 .croping-avatar
+  .preview
+    div style="width: 500px; height: 300px; overflow: hidden"
+      - width, height = FastImage.size("public/#{@group.avatar.url}")
+      = image_tag @group.avatar.url, :id => "preview", data: { width: width, height: height}
+    = form_for @group, html: { class: 'form' } do |f|
+      - %w[x y w h].each do |attribute|
+        = f.hidden_field "crop_#{attribute}", :id => attribute
+      - %w[w h].each do |attribute|
+        = f.hidden_field "coef_#{attribute}", :id => "coef_#{attribute}"
+      .submit-placeholder
+        = f.submit "Обрезать изображение", class: 'submit-btn'
+  br
   = image_tag @group.avatar.url, :id => "cropbox"
 
-  = form_for @group do |f|
-    - %w[x y w h].each do |attribute|
-      = f.hidden_field "crop_#{attribute}", :id => attribute
-    br
-    .submit-placeholder
-      = f.submit "Обрезать изображение", class: 'submit-btn'
+
