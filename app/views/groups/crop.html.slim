@@ -1,0 +1,9 @@
+.croping-avatar
+  = image_tag @group.avatar.url, :id => "cropbox"
+
+  = form_for @group do |f|
+    - %w[x y w h].each do |attribute|
+      = f.hidden_field "crop_#{attribute}", :id => attribute
+    br
+    .submit-placeholder
+      = f.submit "Обрезать изображение", class: 'submit-btn'

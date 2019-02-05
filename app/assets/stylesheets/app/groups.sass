@@ -176,7 +176,7 @@ input.input100
   -o-transform: scale(1)
   transform: scale(1)
 
-.login100-form-btn, .group-invite-button, .index-invite-button, .group-participants-button, .simple-btn
+.login100-form-btn, .group-invite-button, .index-invite-button, .group-participants-button, .simple-btn, .submit-btn
   display: flex
   justify-content: center
   align-items: center
@@ -214,6 +214,11 @@ input.input100
   &:hover
     text-decoration: none
     color: white
+
+.submit-btn
+  width: 20%
+  display: inline-block
+  position: relative
 
 .index-invite-button, .group-participants-button
   width: 50%
@@ -278,3 +283,10 @@ input.input100
 
 .filters
   padding-top: 45px
+
+.croping-avatar
+  .submit-placeholder
+    text-align: center
+
+  img
+    width: 100%
