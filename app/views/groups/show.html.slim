@@ -12,9 +12,9 @@
         p Lorem ipsum dolor sit amet, consectetur adipisicing elit. Omnis optio neque consectetur consequatur magni in nisi, natus beatae quidem quam odit commodi ducimus totam eum, alias, adipisci nesciunt voluptate. Voluptatum.
         - if current_user
           - if current_user.participants.where(user: current_user, group: @group).blank?
-            = link_to 'Присоединиться', groups_participants_path({group_id: @group.id, user_id: current_user.id }), method: :post, class: 'group-invite-button'
+            = link_to 'Присоединиться', group_participants_path({group_id: @group.id, user_id: current_user.id }), method: :post, class: 'group-invite-button'
           - else
-            = link_to 'Выйти из группы', groups_participant_path(@group), method: :delete, class: 'group-invite-button'
+            = link_to 'Выйти из группы', group_participant_path(@group), method: :delete, class: 'group-invite-button'
       .col-sm-4
         h2.mt-4 Свяжитесь с нами
         address
@@ -25,7 +25,7 @@
           = link_to ' vk.com/vlajkee', "http://vk.com/vlajkee"
         .group-settings-block
           - if current_user && current_user.participants.where(user: current_user, group: @group).exists?
-            = link_to 'Наши участники', groups_participants_path(group_id: @group.id), method: :get, class: 'group-participants-button'
+            = link_to 'Наши участники', group_participants_path(group_id: @group.id), method: :get, class: 'group-participants-button'
             = link_to '#', class: 'settings-icon'
               = fa_icon 'cog', class: "fa-3x"
 

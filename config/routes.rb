@@ -8,8 +8,9 @@ Rails.application.routes.draw do
 
   root 'groups#index'
 
-  resources :groups
-  namespace :groups do
-    resources :participants, controller: :participants
+  resources :groups do
+    scope module: :groups do
+      resources :participants, controller: :participants
+    end
   end
 end

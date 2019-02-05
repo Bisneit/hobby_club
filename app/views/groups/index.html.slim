@@ -12,10 +12,10 @@
           - participant = current_user.participants.where(user: current_user, group: group).first
           - if participant.blank?
             - btn_text = group.public? ? 'Присоединиться' : 'Подать заявку'
-            = link_to btn_text, groups_participants_path({group_id: group.id, user_id: current_user.id }), method: :post, class: 'index-invite-button'
+            = link_to btn_text, group_participants_path({group_id: group.id, user_id: current_user.id }), method: :post, class: 'index-invite-button'
           - else
             - btn_text = participant.confirmed? ? 'Выйти из группы' : 'Отменить заявку'
-            = link_to btn_text, groups_participant_path(group), method: :delete, class: 'index-invite-button'
+            = link_to btn_text, group_participant_path(id: participant.id, group_id: group.id), method: :delete, class: 'index-invite-button'
         - elsif !current_user
           = link_to 'Присоединиться', new_user_session_path, class: 'index-invite-button'
     hr/

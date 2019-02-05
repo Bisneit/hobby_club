@@ -9,6 +9,10 @@ class Groups::ParticipantsController < ApplicationController
     render 'group_participants/index', locals: { group_id: group_id }
   end
 
+  def show
+
+  end
+
   def create
     user = User.find_by(id: params[:user_id])
     group = Group.find_by(id: params[:group_id])
@@ -31,7 +35,7 @@ class Groups::ParticipantsController < ApplicationController
   end
 
   def destroy
-    group = Group.find_by(id: params[:id])
+    group = Group.find_by(id: params[:group_id])
     group.participants.where(user: current_user).delete_all
     flash[:success] = "Вы покинули группу"
     redirect_back fallback_location: root_path
