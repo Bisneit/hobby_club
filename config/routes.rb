@@ -10,6 +10,6 @@ Rails.application.routes.draw do
 
   resources :groups
   namespace :groups do
-    resources :participants
+    resources :participants, controller: :participants
   end
 end

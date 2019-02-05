@@ -3,10 +3,10 @@
 class GroupsController < ApplicationController
   def index
     result = if params[:my_groups]
-                group_ids = current_user.participants.pluck(:group_id)
+                group_ids = current_user.participants.confirmed.pluck(:group_id)
                 Group.where(id: group_ids)
               else
-                Group.with_public_access
+                Group.all
               end
     @groups = result.paginate(page: params[:page], per_page: 10)
   end

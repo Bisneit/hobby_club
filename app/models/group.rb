@@ -11,5 +11,9 @@ class Group < ApplicationRecord
     avatar.recreate_versions! if crop_x.present?
   end
 
+  def public?
+    public
+  end
+  
   scope :with_public_access, -> { where(public: true) }
 end

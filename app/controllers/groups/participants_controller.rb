@@ -12,14 +12,21 @@ class Groups::ParticipantsController < ApplicationController
   def create
     user = User.find_by(id: params[:user_id])
     group = Group.find_by(id: params[:group_id])
+
     if user.participants.where(group: group).exists?
       flash[:notice] = "Вы уже вступили в эту группу"
     elsif user && group
-      Groups::Participant.create(group: group, user: user)
-      flash[:success] = "Вы успешно вступили в группу"
+      if group.public?
+        group.participants.create(user: user, status: :confirmed, confirmed_at: Time.current)
+        flash[:success] = "Вы успешно вступили в группу"
+      else
+        group.participants.create(user: user, status: :requested, confirmed_at: Time.current)
+        flash[:success] = "Заявка в группу успешно отправлена"
+      end
     else
       flash[:notice] = "Что то пошло не так"
     end
+
     redirect_back fallback_location: root_path
   end
 

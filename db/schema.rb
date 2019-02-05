@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_02_02_123631) do
+ActiveRecord::Schema.define(version: 2019_02_05_160317) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -59,6 +59,8 @@ ActiveRecord::Schema.define(version: 2019_02_02_123631) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "group_roles_id"
+    t.integer "status"
+    t.datetime "confirmed_at"
     t.index ["group_id"], name: "index_group_participants_on_group_id"
     t.index ["group_roles_id"], name: "index_group_participants_on_group_roles_id"
     t.index ["user_id"], name: "index_group_participants_on_user_id"
