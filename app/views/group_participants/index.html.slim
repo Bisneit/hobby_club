@@ -3,11 +3,16 @@
     .d-flex.justify-content-between
       h1.my-4
         small Наши участники
+      .requests
+        - if requested
+          = link_to 'Наши участники', group_participants_path(group_id: group_id), method: :get, class: 'simple-btn'
+        - else
+          = link_to 'Заявки на вступление', group_participants_path(group_id: group_id, requested: true), method: :get, class: 'simple-btn'
       = search_form_for @filters, url: group_participants_path do |f|
         = f.hidden_field :group_id, value: group_id
         .filters
-          = f.search_field :user_first_name_or_user_last_name_cont, type: 'text', placeholder: 'Поиск', class: 'search'
-          = f.button :submit, class: 'simple-btn'
+          = f.search_field :user_first_name_or_user_last_name_cont, type: 'text', placeholder: 'Поиск', class: 'search', autocomplete: 'off'
+          = f.button 'Поиск', class: 'simple-btn'
 
     .row
       - @participants.each do |participant|
@@ -17,7 +22,14 @@
               img.card-img-top alt="" src="http://placehold.it/700x500" /
             .card-body
               h4.card-title
-                = link_to [participant.first_name, participant.last_name].join(' '), group_participant_path(id: participant.id), method: :get
-              p.card-text Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet numquam aspernatur eum quasi sapiente nesciunt?
+                = link_to [participant.first_name, participant.last_name].join(' '), user_path(id: participant.user.id), method: :get
+              - if requested
+                .choice
+                  = link_to "Принять", group_participant_path(id: participant.id, group_id: group_id, confirm: true),
+                    method: :patch, class: 'simple-btn confirm'
+                  = link_to "Отклонить", group_participant_path(id: participant.id, group_id: group_id, confirm: false),
+                    method: :patch, class: 'simple-btn reject'
+              - else
+                p.card-text Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet numquam aspernatur eum quasi sapiente nesciunt?
 
     .pagination.justify-content-center = will_paginate @participants, renderer: WillPaginate::ActionView::BootstrapLinkRenderer

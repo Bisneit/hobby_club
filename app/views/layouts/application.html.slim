@@ -35,6 +35,9 @@ html
                   = link_to 'Вход', new_user_session_path, class: 'nav-link'
               - else
                 li.nav-item.active
-                  = link_to 'Выход', destroy_user_session_path, :method => :delete, class: 'nav-link'
+                  .profile
+                    = link_to user_path(current_user.id)
+                      .icon = fa_icon 'user', class: "fa-2x"
+                    = link_to 'Выход', destroy_user_session_path, :method => :delete, class: 'nav-link'
 
     = yield

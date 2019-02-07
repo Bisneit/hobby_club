@@ -6,12 +6,16 @@ class Groups::Participant < ApplicationRecord
 
   delegate :first_name, :last_name, to: :user
 
-  enum status: [:requested, :confirmed]
+  enum status: %i[requested confirmed]
 
   scope :confirmed, -> { where(status: :confirmed) }
   scope :requested, -> { where(status: :requested) }
 
   def confirmed?
     status == 'confirmed'
+  end
+
+  def confirm!
+    update(status: :confirmed, confirmed_at: Time.current)
   end
 end

@@ -1,0 +1,71 @@
+.container
+  .row
+    .col-md-12.text-center
+      .panel.panel-default
+        .userprofile.social
+          .userpic
+            img.userpicimg[src="https://bootdey.com/img/Content/avatar/avatar6.png" alt=""]
+          h3.username = [@user.first_name, @user.last_name].join(' ')
+          p
+            | Gujarat, India
+          .socials.tex-center
+            a.btn.btn-circle.btn-primary[href=""]
+              i.fa.fa-vk
+            a.btn.btn-circle.btn-danger[href=""]
+              i.fa.fa-instagram
+        .col-md-12.border-top.border-bottom
+          ul.nav.nav-pills.pull-left.countlist[role="tablist"]
+            li[role="presentation"]
+              h3
+                | 1452
+                br
+                small
+                  | Подписок
+            li[role="presentation"]
+              h3
+                | 245
+                br
+                small
+                  | Подписчиков
+          button.btn.btn-primary.followbtn
+            | Подписаться
+        .clearfix
+    .col-md-4.col-sm-12.pull-right
+      .panel.panel-default
+        .media-body
+          .bio
+            h3.media-heading
+              | Биография
+            h5.page-subtitle
+              | Пол:
+              br
+              | Возраст:
+              br
+              | Увлечения:
+
+    .col-md-8.col-sm-12.pull-left.posttimeline
+      .panel.panel-default
+        .panel-body
+          .status-upload.nopaddingbtm
+            form
+              = form_for :post, url: posts_path(:post) do |f|
+                = f.text_area :body, class: 'form-control', placeholder: "Расскажи что нибудь интересное"
+                = f.hidden_field :user_id, value: @user.id
+                = f.submit 'Поделиться', class: 'btn btn-success pull-right'
+      .panel.panel-default
+        - @user.profile_posts.each do |post|
+          .col-md-12.commentsblock.border-top
+            .media
+              .media-left
+                a[href="javascript:void(0)"]
+                  img.media-object[src="https://bootdey.com/img/Content/avatar/avatar3.png" alt=""]
+              .media-body
+                h4.media-heading
+                  = [post.author.first_name, post.author.last_name].join(' ')
+                  br
+                  .time
+                    small
+                      i.fa.fa-clock-o
+                      = post.created_at.strftime(" %m/%d/%Y в %H:%M")
+                p
+                  = post.body

@@ -13,6 +13,7 @@
  *= require_self
  *= require app/groups
  *= require app/group_participants
+ *= require app/users
  *= require jquery.Jcrop
  */
 
@@ -25,4 +26,14 @@
     margin-bottom: 0;
     border: 1px solid transparent;
     border-radius: 0.25rem
+}
+
+.profile {
+    display: flex;
+}
+
+.icon {
+    margin-right: 6px;
+    padding-top: 3px;
+    color: rgba(255, 243, 243, 0.74);
 }
