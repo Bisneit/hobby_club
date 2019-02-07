@@ -2,7 +2,7 @@ class Groups::Participant < ApplicationRecord
   self.table_name = :group_participants
   belongs_to :user
   belongs_to :group
-  has_one :role, foreign_key: :role_id, class_name: Groups::Role.name
+  belongs_to :role, class_name: Groups::Role.name, foreign_key: :group_roles_id
 
   delegate :first_name, :last_name, to: :user
 

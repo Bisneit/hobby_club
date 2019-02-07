@@ -28,6 +28,9 @@ class GroupsController < ApplicationController
         @group.roles.create!(name: role['name'], description: role['description'])
       end
 
+      @group.participants.create(user: current_user, status: :confirmed,
+                                confirmed_at: Time.current, group_roles_id: @group.roles.find_by(name: 'Admin').id)
+
       if permitted_params[:avatar].blank?
         redirect_to groups_path
       else
