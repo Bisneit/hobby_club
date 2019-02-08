@@ -1,0 +1,47 @@
+.container
+  .row
+    .col-md-12.text-center
+      .panel.panel-default
+        .userprofile.social
+          .userpic
+            img.userpicimg[src="https://bootdey.com/img/Content/avatar/avatar6.png" alt=""]
+          h3.username = [@user.first_name, @user.last_name].join(' ')
+          p
+            = [@user.country_name, @user.city].join(', ')
+          .socials.tex-center
+            a.btn.btn-circle.btn-primary[href=""]
+              i.fa.fa-vk
+            a.btn.btn-circle.btn-danger[href=""]
+              i.fa.fa-instagram
+        .clearfix
+
+
+    .col-md-8.offset-md-2.posttimeline
+      .commentsblock
+          .media
+            .media-body
+              h4.media-heading
+                .edit Редактирование профиля
+              = simple_form_for @user, html: { class: 'edit' } do |f|
+                .form-group.row
+                  .col-sm-1.offset-md-2.field-name Имя
+                  .col-sm-5.offset-md-1.input
+                    = f.text_field :first_name, class: 'form-control input'
+                .form-group.row
+                  .col-sm-1.offset-md-2.field-name Фамилия
+                  .col-sm-5.offset-md-1.input
+                    = f.text_field :last_name, class: 'form-control input'
+                .form-group.row
+                  .col-sm-1.offset-md-2.field-name Страна
+                  .col-sm-5.offset-md-1.input
+                     = f.country_select :country, {priority_countries: ["RU", "US", "DE"]}, { class: 'form-control' }
+                .form-group.row
+                  .col-sm-1.offset-md-2.field-name Город
+                  .col-sm-5.offset-md-1.input
+                    = f.text_field :city, class: 'form-control input'
+                .form-group.row
+                  .col-sm-1.offset-md-2.field-name Возраст
+                  .col-sm-5.offset-md-1.input
+                    = f.text_field :age, class: 'form-control input', type: :number
+                br
+                = f.submit 'Обновить', class: 'simple-btn'

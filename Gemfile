@@ -30,6 +30,7 @@ gem "rmagick"
 gem "rack", ">= 2.0.6"
 gem 'fastimage'
 gem 'simple_form'
+gem 'country_select'
 
 group :development, :test do
   gem 'byebug', platforms: %i[mri mingw x64_mingw]

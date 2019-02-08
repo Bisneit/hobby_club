@@ -7,7 +7,7 @@
             img.userpicimg[src="https://bootdey.com/img/Content/avatar/avatar6.png" alt=""]
           h3.username = [@user.first_name, @user.last_name].join(' ')
           p
-            | Gujarat, India
+            = [@user.country_name, @user.city].join(', ')
           .socials.tex-center
             a.btn.btn-circle.btn-primary[href=""]
               i.fa.fa-vk
@@ -27,8 +27,11 @@
                 br
                 small
                   | Подписчиков
-          button.btn.btn-primary.followbtn
-            | Подписаться
+          - if @user == current_user
+            = link_to 'Редактировать профиль', edit_user_path(@user), class: 'btn btn-primary followbtn'
+          - else
+            button.btn.btn-primary.followbtn
+              | Подписаться
         .clearfix
     .col-md-4.col-sm-12.pull-right
       .panel.panel-default
@@ -62,9 +65,9 @@
                 h4.media-heading
                   div
                     = [post.author.first_name, post.author.last_name].join(' ')
-                    = link_to post_path(post), method: :delete
-                      .close.i.fa.fa-close
-                  br
+                    - if post.author == current_user || post.user == current_user
+                      = link_to post_path(post), method: :delete
+                        .close.i.fa.fa-close
                   .time
                     small
                       i.fa.fa-clock-o

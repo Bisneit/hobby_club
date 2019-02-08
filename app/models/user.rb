@@ -9,4 +9,9 @@ class User < ApplicationRecord
   has_many :posts, :class_name => Post.name
 
   enum sex: %i[male female]
+
+  def country_name
+    country = ISO3166::Country[self.country]
+    country.translations['ru'] || country
+  end
 end
