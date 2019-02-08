@@ -9,7 +9,7 @@ Rails.application.routes.draw do
   root 'groups#index'
 
   resources :users
-  resources :posts, only: :create
+  resources :posts
   resources :groups do
     scope module: :groups do
       resources :participants, controller: :participants

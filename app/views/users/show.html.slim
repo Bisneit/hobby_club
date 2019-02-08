@@ -47,13 +47,12 @@
       .panel.panel-default
         .panel-body
           .status-upload.nopaddingbtm
-            form
-              = form_for :post, url: posts_path(:post) do |f|
-                = f.text_area :body, class: 'form-control', placeholder: "Расскажи что нибудь интересное"
-                = f.hidden_field :user_id, value: @user.id
-                = f.submit 'Поделиться', class: 'btn btn-success pull-right'
+            = form_with url: posts_path do |f|
+              = f.text_area :body, class: 'form-control', placeholder: "Расскажи что нибудь интересное"
+              = f.hidden_field :user_id, value: @user.id
+              = f.submit 'Поделиться', class: 'btn btn-success pull-right'
       .panel.panel-default
-        - @user.profile_posts.each do |post|
+        - @user.profile_posts.order(created_at: :desc).each do |post|
           .col-md-12.commentsblock.border-top
             .media
               .media-left
@@ -61,7 +60,10 @@
                   img.media-object[src="https://bootdey.com/img/Content/avatar/avatar3.png" alt=""]
               .media-body
                 h4.media-heading
-                  = [post.author.first_name, post.author.last_name].join(' ')
+                  div
+                    = [post.author.first_name, post.author.last_name].join(' ')
+                    = link_to post_path(post), method: :delete
+                      .close.i.fa.fa-close
                   br
                   .time
                     small

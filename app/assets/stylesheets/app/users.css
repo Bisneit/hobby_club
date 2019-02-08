@@ -267,6 +267,10 @@ margin-bottom: 0
   font-size: 16px;
 }
 
+.close {
+  font-size: 14px;
+}
+
 .media-object {
   max-width: 50px;
   border-radius: 50px;

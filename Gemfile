@@ -29,6 +29,7 @@ gem 'carrierwave', '~> 1.0'
 gem "rmagick"
 gem "rack", ">= 2.0.6"
 gem 'fastimage'
+gem 'simple_form'
 
 group :development, :test do
   gem 'byebug', platforms: %i[mri mingw x64_mingw]
