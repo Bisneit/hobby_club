@@ -10,6 +10,7 @@ Rails.application.routes.draw do
 
   resources :users
   resources :posts
+  resources :events
   resources :groups do
     scope module: :groups do
       resources :participants, controller: :participants

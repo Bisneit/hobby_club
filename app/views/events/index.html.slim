@@ -1,0 +1,14 @@
+- current_date = Date.today
+.calendar-filter-line
+.calendar.scrollable-content
+  = calendar_days_of_week
+  - calendar_scope.each_slice(7) do |week_params|
+    .week-line
+      - week_params.each do |date, params|
+        .day-block class=calendar_day_class(date, current_date) data-role="#{date}-day-block"
+          .date = calendar_day_date(date)
+          .issues-count = t('issue_calendar.issues.count', count: params[:issues_count])
+          = calendar_day_workload('day-workload', max_workload, params[:day_workload])
+          .estimated-issues
+            = calendar_estimated_issues_count(params[:estimated_issues_count], params[:planned_execution_time_sum])
+            = calendar_day_workload('planned-execution-time-workload', max_workload, params[:planned_execution_time_workload])

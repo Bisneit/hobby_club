@@ -19,4 +19,3 @@
 //= require jquery.color
 //= require jquery.Jcrop
 //= require_tree .
-

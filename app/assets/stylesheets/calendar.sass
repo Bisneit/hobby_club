@@ -1,0 +1,131 @@
+.calendar-filter-line
+  display: flex
+  flex-direction: row
+
+.calendar
+  margin: 0 20px 5px
+
+  .calendar-head
+    display: flex
+    flex-direction: row
+    font-weight: 600
+    line-height: 25px
+    font-size: 18px
+    color: gray
+    justify-content: space-around
+
+    .weekend-day
+      color: #ff4c4c
+
+  .week-line
+    flex: 1 1 0%
+    display: flex
+    flex-direction: row
+
+    .day-block
+      flex: 1 1 0%
+      border: 2px solid #b8b9ba
+      border-right: 0
+      border-bottom: 0
+      box-sizing: border-box
+      padding: 5px 10px 0
+      position: relative
+      font-size: 18px
+      line-height: 18px
+
+      &.not-current-month
+        border: 2px solid #eff0f2
+        border-right: 0
+        border-bottom: 0
+
+        .date
+          color: gray
+
+        &:last-child
+          border-right: 2px solid #eff0f2
+
+      &:last-child
+        border-right: 2px solid #b8b9ba
+
+      .date
+        margin-bottom: 5%
+
+      .issues-count
+        font-size: 125%
+        line-height: 150%
+
+      .day-workload, .planned-execution-time-workload
+        height: 3px
+        box-sizing: border-box
+
+        &.green
+          background-color: green
+
+        &.orange
+          background-color: orange
+
+        &.red
+          background-color: red
+
+      .day-workload
+        margin: 10px 0 30px 0
+
+      .estimated-issues
+        position: absolute
+        left: 0
+        bottom: 10%
+        padding: 0 10px
+        width: calc(100% - 20px)
+
+        .estimated-issues-count
+          font-size: 75%
+          line-height: 100%
+          margin-bottom: 10px
+
+    &:last-child
+      .day-block
+        border-bottom: 2px solid #b8b9ba
+
+      .first-day-of-next-month
+        border-left: 2px solid #b8b9ba
+
+      .not-current-month
+        border-top: 2px solid #b8b9ba
+        border-bottom: 2px solid #eff0f2
+
+.tcontent
+  .tcontent-box
+    &.main-box
+      .calendar
+        &.scrollable-content
+          .mCSB_container
+            display: flex
+            flex-direction: column
+            min-height: 650px
+            height: 80vh
+
+@media all and (max-width: 1600px)
+  .calendar
+    .week-line
+      .day-block
+        font-size: 15px
+        line-height: 15px
+
+@media all and (max-height: 820px)
+  .calendar
+    height: 75vh
+
+    .calendar-head
+      flex: unset
+      min-height: 25px
+
+    .week-line
+      flex: unset
+      min-height: 125px
+
+      .day-block
+        min-height: 125px
+
+@media all and (max-height: 650px)
+  .calendar
+    height: 70vh
