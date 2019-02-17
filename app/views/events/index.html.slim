@@ -56,7 +56,10 @@
     .logo = @group.name
     .avatar
       .avatar__img
-        = image_tag(@group.avatar.url, :size => "100x100")
+        - if @group.avatar.present?
+          = image_tag(@group.avatar.url, :size => "100x100")
+        - else
+          = image_tag('/uploads/missing.jpg', :size => "100x100")
       br
     nav.menu
       = link_to events_path(group: @group), class: 'menu__item menu__item--active'

@@ -10,10 +10,12 @@
                   .edit Создать событие
                 br
                 = simple_form_for @event, html: { multipart: true, class: 'edit', novalidate: true  } do |f|
+                  = f.error :base
+                  = f.error_notification
                   .form-group.row
                     .col-sm-2.offset-md-1.field-name Краткое описание
                     .col-sm-6.offset-md-1.input
-                      = f.text_area :description, class: 'form-control', required: true
+                      = f.text_area :description, class: 'form-control'
                   .form-group.row
                     .col-sm-2.offset-md-1.field-name Дата события
                     .col-sm-6.offset-md-1.input
@@ -22,7 +24,7 @@
                     .col-sm-2.offset-md-1.field-name Время начала
                     .col-sm-6.offset-md-1.input
                       = f.time_field :start_at
-                  = f.hidden_field :group_id, value: params[:group]
+                  = f.hidden_field :group_id, value: @group.id
                   .form-group.row
                     .col-sm-2.offset-md-1.field-name Время окончания
                     .col-sm-6.offset-md-1.input
@@ -42,7 +44,7 @@
                   .form-group.row.hidden id="week"
                     .col-sm-2.offset-md-1.field-name Дни недели
                     .col-sm-6.offset-md-1.input
-                      = f.collection_select :week_days, [[:mon, 'Пн'], [:tue, 'Вт'], [:wed, 'Ср'], [:thu, 'Чт'], [:fri, 'Пт'], [:sat, 'Сб'], [:sun, 'Вск']], :first,:last, {}, { class: 'form-control select', multiple: true }
+                      = f.collection_select :days, [[1, 'Пн'], [2, 'Вт'], [3, 'Ср'], [4, 'Чт'], [5, 'Пт'], [6, 'Сб'], [0, 'Вск']], :first,:last, {}, { class: 'form-control', multiple: true }
                   br
                   = f.submit 'Создать', class: 'simple-btn'
 
@@ -50,7 +52,10 @@
     .logo = link_to @group.name, group_path(@group)
     .avatar
       .avatar__img
-        = image_tag(@group.avatar.url, :size => "100x100")
+        - if @group.avatar.present?
+          = image_tag(@group.avatar.url, :size => "100x100")
+        - else
+          = image_tag('/uploads/missing.jpg', :size => "100x100")
       br
     nav.menu
       = link_to events_path(group: @group), class: 'menu__item menu__item--active'

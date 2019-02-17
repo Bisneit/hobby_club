@@ -30,8 +30,6 @@ gem "rmagick"
 gem "rack", ">= 2.0.6"
 gem 'fastimage'
 gem 'simple_form'
-gem 'client_side_validations'
-gem 'client_side_validations-simple_form'
 gem 'country_select'
 
 group :development, :test do

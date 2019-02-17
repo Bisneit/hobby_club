@@ -16,5 +16,9 @@ class Group < ApplicationRecord
     public
   end
 
+  def default_url(*args)
+    "/images/" + [version_name, "missing.png"].compact.join('_')
+  end
+
   scope :with_public_access, -> { where(public: true) }
 end

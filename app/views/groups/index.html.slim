@@ -4,7 +4,11 @@
   - @groups.each do |group|
     .row
       .col-md-7
-        .index-image = image_tag(group.avatar.url(:medium))
+        .index-image
+          - if group.avatar.present?
+            = image_tag(group.avatar.url(:medium))
+          - else
+            = image_tag('/uploads/missing.jpg')
       .col-md-5
         h3 = link_to group.name, group_path(group.id)
         .index-group-description = Rinku.auto_link(group.description, :all, 'target="_blank"').html_safe

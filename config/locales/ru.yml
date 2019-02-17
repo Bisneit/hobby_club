@@ -1,2 +1,16 @@
 ru:
   month_names: [~, Январь, Февраль, Март, Апрель, Май, Июнь, Июль, Август, Сентябрь, Октябрь, Ноябрь, Декабрь]
+  activerecord:
+    errors:
+      models:
+        event:
+          attributes:
+            date:
+              blank: 'Заполните поле даты'
+            start_at:
+              blank: 'Введите время события'
+            end_at:
+              blank: 'Введите время события'
+            description:
+              blank: 'Заполните описание'
+
