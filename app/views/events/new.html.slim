@@ -1,0 +1,64 @@
+.wrapper
+  main
+    .toolbar
+      .container
+        .row
+          .col-md-10.offset-md-1.posttimeline
+            .media
+              .media-body
+                h4.media-heading
+                  .edit Создать событие
+                br
+                = simple_form_for @event, html: { multipart: true, class: 'edit', novalidate: true  } do |f|
+                  .form-group.row
+                    .col-sm-2.offset-md-1.field-name Краткое описание
+                    .col-sm-6.offset-md-1.input
+                      = f.text_area :description, class: 'form-control', required: true
+                  .form-group.row
+                    .col-sm-2.offset-md-1.field-name Дата события
+                    .col-sm-6.offset-md-1.input
+                      = f.date_field :date
+                  .form-group.row
+                    .col-sm-2.offset-md-1.field-name Время начала
+                    .col-sm-6.offset-md-1.input
+                      = f.time_field :start_at
+                  = f.hidden_field :group_id, value: params[:group]
+                  .form-group.row
+                    .col-sm-2.offset-md-1.field-name Время окончания
+                    .col-sm-6.offset-md-1.input
+                      = f.time_field :end_at
+                  .form-group.row
+                    .col-sm-2.offset-md-1.field-name Повторение событий
+                    .col-sm-6.offset-md-1.input
+                      = f.collection_select :type, [[:no, 'Без повторений'], [:day, 'Каждый день'], [:week, 'Дни недели']], :first,:last,{},{ class: 'form-control', id: :repeat }
+                  .form-group.row.hidden id="repeat_params"
+                    .col-sm-2.offset-md-1.field-name Количество повторений
+                    .col-sm-6.offset-md-1.input
+                      = f.text_field :repeat_number, class: 'form-control input', type: :number
+                  .form-group.row.hidden id="days"
+                    .col-sm-2.offset-md-1.field-name Без выходных
+                    .col-sm-6.offset-md-1.input
+                      = f.check_box :without_weekends, class: 'form-control input', style: 'transform: scale(0.5)'
+                  .form-group.row.hidden id="week"
+                    .col-sm-2.offset-md-1.field-name Дни недели
+                    .col-sm-6.offset-md-1.input
+                      = f.collection_select :week_days, [[:mon, 'Пн'], [:tue, 'Вт'], [:wed, 'Ср'], [:thu, 'Чт'], [:fri, 'Пт'], [:sat, 'Сб'], [:sun, 'Вск']], :first,:last, {}, { class: 'form-control select', multiple: true }
+                  br
+                  = f.submit 'Создать', class: 'simple-btn'
+
+  sidebar
+    .logo = link_to @group.name, group_path(@group)
+    .avatar
+      .avatar__img
+        = image_tag(@group.avatar.url, :size => "100x100")
+      br
+    nav.menu
+      = link_to events_path(group: @group), class: 'menu__item menu__item--active'
+        i.menu__icon.fa.fa-calendar
+        span.menu__text Календарь
+      a.menu__item.menu__item--active href="#"
+        i.menu__icon.fa.fa-list
+        span.menu__text Список
+      = link_to new_event_path(group: @group), class: 'menu__item menu__item--active'
+        i.menu__icon.fa.fa-plus
+        span.menu__text Создать событие

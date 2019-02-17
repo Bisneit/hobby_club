@@ -48,35 +48,23 @@
                           h4.media-heading
                             div
                               i.fa.fa-clock-o
-                              = "#{event.start_date.strftime("%H:%M")} - #{event.end_date.strftime("%H:%M")}"
+                              = "#{event.start_at.strftime("%H:%M")} - #{event.end_at.strftime("%H:%M")}"
                               .close.i.fa.fa-close
                           p
                             = event.description
   sidebar
-    .logo logo
+    .logo = @group.name
     .avatar
       .avatar__img
-        img alt="avatar" src="https://picsum.photos/70" /
-      .avatar__name John Smith
+        = image_tag(@group.avatar.url, :size => "100x100")
+      br
     nav.menu
-      a.menu__item.menu__item--active href="#"
+      = link_to events_path(group: @group), class: 'menu__item menu__item--active'
         i.menu__icon.fa.fa-calendar
         span.menu__text Календарь
       a.menu__item.menu__item--active href="#"
         i.menu__icon.fa.fa-list
+        span.menu__text Список
+      = link_to new_event_path(group: @group), class: 'menu__item menu__item--active'
+        i.menu__icon.fa.fa-plus
         span.menu__text Создать событие
-      a.menu__item href="#"
-        i.menu__icon.fa.fa-home
-        span.menu__text overview
-      a.menu__item href="#"
-        i.menu__icon.fa.fa-envelope
-        span.menu__text messages
-      a.menu__item href="#"
-        i.menu__icon.fa.fa-bar-chart
-        span.menu__text goals
-      a.menu__item href="#"
-        i.menu__icon.fa.fa-trophy
-        span.menu__text achivements
-      a.menu__item href="#"
-        i.menu__icon.fa.fa-sliders
-        span.menu__text measurements

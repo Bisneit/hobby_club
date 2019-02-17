@@ -15,6 +15,7 @@
 //= require activestorage
 //= require turbolinks
 //= require bootstrap-sprockets
+//= require rails.validations.simple_form.bootstrap4
 //= require ckeditor/init
 //= require jquery.color
 //= require jquery.Jcrop

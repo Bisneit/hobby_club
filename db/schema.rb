@@ -67,8 +67,9 @@ ActiveRecord::Schema.define(version: 2019_02_09_095514) do
     t.bigint "group_id"
     t.integer "duration"
     t.string "place"
-    t.datetime "start_date"
-    t.datetime "end_date"
+    t.date "date"
+    t.time "start_at"
+    t.time "end_at"
     t.index ["group_id"], name: "index_events_on_group_id"
   end
 

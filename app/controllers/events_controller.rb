@@ -3,6 +3,21 @@
 class EventsController < ApplicationController
   before_action :authenticate_user!
 
+  def new
+    @event = Event.new
+    @group = Group.find(params[:group])
+
+  end
+
+  def create
+    if repeat_params[:type] == 'no'
+      Event.create(event_params)
+    else
+      byebug
+    end
+    redirect_back fallback_location: root_path
+  end
+
   def index
     @current_date = Date.today
 
@@ -14,8 +29,23 @@ class EventsController < ApplicationController
     keys = (start_at..end_at).map { |date| date }
     @events = keys.each_with_object({}) do |date, memo|
       memo[date.strftime('%y-%m-%d')] = {
-        events: Event.where(group: @group).where('DATE(start_date) = ?', date.strftime('%d-%m-%y'))
+        events: Event.where(group: @group).where('DATE(date) = ?', date.strftime('%d-%m-%y'))
       }
     end
+  end
+
+  private
+
+  def permitted_params
+    params.require(:event).permit(:description, :date, :start_at, :end_at, :group_id,
+                                  :type, :repeat_number, :without_weekends, :week_days)
+  end
+
+  def event_params
+    permitted_params.slice(:description, :date, :start_at, :end_at, :group_id)
+  end
+
+  def repeat_params
+    permitted_params.slice(:type, :repeat_number, :without_weekends, :week_days)
   end
 end
