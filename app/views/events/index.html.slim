@@ -1,0 +1,82 @@
+.wrapper
+  main
+    .toolbar
+      .toggle
+        = link_to 'Пред', events_path(date: @param_date.prev_month, group: @group), class: 'toggle__option'
+        = link_to 'Тек', events_path(date: Date.current, group: @group), class: 'toggle__option'
+        = link_to 'След', events_path(date: @param_date.next_month, group: @group), class: 'toggle__option'
+      .current-month = "#{I18n.t(:month_names)[@param_date.month]}, #{@param_date.year}"
+      .search-input
+        input type="text" value=("What are you looking for?") /
+        i.fa.fa-search
+    .calendar
+      .calendar__header
+        div Пн
+        div Вт
+        div Ср
+        div Чт
+        div Пт
+        div Сб
+        div Вс
+      = @events.each_slice(7) do |group|
+        .calendar__week
+          - group.each do |day, params|
+            - parsed_date = Time.parse(day)
+            .calendar__day class=('current_day' if same_date(@current_date, parsed_date))
+              .day
+                = parsed_date.day
+              .events_count
+                = link_to params[:events].size, events_path(day: day, group: @group), class: 'events_count' if params[:events].size != 0
+    br
+    div data-role='events-list'
+      - if @events[@day.strftime('%y-%m-%d')] && @events[@day.strftime('%y-%m-%d')][:events].blank?
+        .events-title = "Нет событий на  #{@current_date.strftime('%F')}"
+      -else
+        .events-title = "События на  #{@current_date.strftime('%F')}"
+        .container
+          .row
+            .col-md-8.offset-md-2.col-sm-12.pull-left.posttimeline
+              .panel.panel-default
+                - if  @events[@day.strftime('%y-%m-%d')]
+                  - @events[@day.strftime('%y-%m-%d')][:events].each do |event|
+                    .col-md-12.commentsblock.border-top
+                      .media
+                        .media-left
+                          a[href="javascript:void(0)"]
+                            img.media-object[src="https://bootdey.com/img/Content/avatar/avatar3.png" alt=""]
+                        .media-body
+                          h4.media-heading
+                            div
+                              i.fa.fa-clock-o
+                              = "#{event.start_date.strftime("%H:%M")} - #{event.end_date.strftime("%H:%M")}"
+                              .close.i.fa.fa-close
+                          p
+                            = event.description
+  sidebar
+    .logo logo
+    .avatar
+      .avatar__img
+        img alt="avatar" src="https://picsum.photos/70" /
+      .avatar__name John Smith
+    nav.menu
+      a.menu__item.menu__item--active href="#"
+        i.menu__icon.fa.fa-calendar
+        span.menu__text Календарь
+      a.menu__item.menu__item--active href="#"
+        i.menu__icon.fa.fa-list
+        span.menu__text Создать событие
+      a.menu__item href="#"
+        i.menu__icon.fa.fa-home
+        span.menu__text overview
+      a.menu__item href="#"
+        i.menu__icon.fa.fa-envelope
+        span.menu__text messages
+      a.menu__item href="#"
+        i.menu__icon.fa.fa-bar-chart
+        span.menu__text goals
+      a.menu__item href="#"
+        i.menu__icon.fa.fa-trophy
+        span.menu__text achivements
+      a.menu__item href="#"
+        i.menu__icon.fa.fa-sliders
+        span.menu__text measurements
