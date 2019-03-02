@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_02_09_095514) do
+ActiveRecord::Schema.define(version: 2019_03_02_151317) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -53,6 +53,11 @@ ActiveRecord::Schema.define(version: 2019_02_09_095514) do
     t.index ["type"], name: "index_ckeditor_assets_on_type"
   end
 
+  create_table "event_groups", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "event_participants", force: :cascade do |t|
     t.bigint "user_id"
     t.bigint "event_id"
@@ -70,6 +75,8 @@ ActiveRecord::Schema.define(version: 2019_02_09_095514) do
     t.date "date"
     t.time "start_at"
     t.time "end_at"
+    t.bigint "event_groups_id"
+    t.index ["event_groups_id"], name: "index_events_on_event_groups_id"
     t.index ["group_id"], name: "index_events_on_group_id"
   end
 

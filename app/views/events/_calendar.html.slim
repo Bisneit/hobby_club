@@ -42,19 +42,21 @@
                     .col-md-12.commentsblock.border-top
                       .media
                         .media-left
-                          a[href="javascript:void(0)"]
-                            img.media-object[src="https://bootdey.com/img/Content/avatar/avatar3.png" alt=""]
+                          - if @group.avatar.present?
+                            = image_tag(@group.avatar.url, :size => "50x50")
+                          - else
+                            = image_tag('/uploads/missing.jpg', :size => "50x50")
                         .media-body
                           h4.media-heading
                             div
                               i.fa.fa-clock-o
-                              = "#{event.start_at.strftime("%H:%M")} - #{event.end_at.strftime("%H:%M")}"
+                              = "#{event.start_at.strftime(" %H:%M")} - #{event.end_at.strftime("%H:%M")}"
                               = link_to event_path(event), method: :delete
                                 .close.i.fa.fa-close
                           p
                             = event.description
   sidebar
-    .logo = @group.name
+    .logo = link_to @group.name, group_path(@group)
     .avatar
       .avatar__img
         - if @group.avatar.present?

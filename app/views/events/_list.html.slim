@@ -11,7 +11,7 @@
                 .media
                   .media-left
                     - if @group.avatar.present?
-                      = image_tag(@group.avatar.url, :size => "50x5")
+                      = image_tag(@group.avatar.url, :size => "50x50")
                     - else
                       = image_tag('/uploads/missing.jpg', :size => "50x50")
                   .media-body
@@ -25,7 +25,7 @@
                       = event.description
             .pagination.justify-content-center = will_paginate @events
   sidebar
-    .logo = @group.name
+    .logo = link_to @group.name, group_path(@group)
     .avatar
       .avatar__img
         - if @group.avatar.present?

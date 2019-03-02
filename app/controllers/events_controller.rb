@@ -27,6 +27,7 @@ class EventsController < ApplicationController
         redirect_to new_event_path(group: Group.find(event_params[:group_id]))
       end
     elsif repeat_params[:type] == 'week'
+      events = []
       if repeat_params[:repeat_number].blank?
         flash[:notice] = 'Введите количество повторений'
         errors = true
@@ -42,6 +43,7 @@ class EventsController < ApplicationController
           flash[:notice] = @event.errors.messages.first.last.first
           errors = true
         end
+        events << @event
         created_events = 1
         last_date = Date.parse(event_params[:date])
         while !errors && created_events <= (repeat_params[:repeat_number].to_i - 1) do
@@ -56,12 +58,14 @@ class EventsController < ApplicationController
               errors = true
               break
             end
+            events << @event
           end
         end
       end
       if errors
         redirect_to new_event_path(group: Group.find(event_params[:group_id]))
       else
+        Events::Group.create(events: events)
         flash[:success] = "Событий создано: #{created_events}"
         redirect_back fallback_location: root_path
       end

@@ -1,0 +1,15 @@
+.new-group
+  = simple_form_for @group, html: { multipart: true, class: 'group-form' } do |f|
+    span.title
+      | Создание группы
+    .wrap-input100.rs1-wrap
+      = f.text_field :name, class: 'input100', placeholder: 'Название группы'
+      span.focus-input100
+    .wrap-input100.rs1-wrap
+      = f.cktext_area :description, class: 'input100', placeholder: 'Описание'
+      span.focus-input100
+    .avatar-block
+      span.avatar-title
+        | Аватар группы
+      = f.file_field :avatar, class: 'avatar'
+    = f.submit "Создать", class: 'login100-form-btn'

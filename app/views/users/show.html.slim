@@ -41,10 +41,13 @@
               | Биография
             h5.page-subtitle
               | Пол:
+              span style="float:right" = @user.sex || '[Не указано]'
               br
               | Возраст:
+              span style="float:right" = @user.age || '[Не указано]'
               br
               | Увлечения:
+              span style="float:right" = @user.info || '[Не указано]'
 
     .col-md-8.col-sm-12.pull-left.posttimeline
       .panel.panel-default
