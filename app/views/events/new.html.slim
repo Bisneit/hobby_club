@@ -32,7 +32,7 @@
                   .form-group.row
                     .col-sm-2.offset-md-1.field-name Повторение событий
                     .col-sm-6.offset-md-1.input
-                      = f.collection_select :type, [[:no, 'Без повторений'], [:day, 'Каждый день'], [:week, 'Дни недели']], :first,:last,{},{ class: 'form-control', id: :repeat }
+                      = f.collection_select :type, [[:no, 'Без повторений'], [:week, 'Дни недели']], :first,:last,{},{ class: 'form-control', id: :repeat }
                   .form-group.row.hidden id="repeat_params"
                     .col-sm-2.offset-md-1.field-name Количество повторений
                     .col-sm-6.offset-md-1.input
@@ -61,7 +61,7 @@
       = link_to events_path(group: @group), class: 'menu__item menu__item--active'
         i.menu__icon.fa.fa-calendar
         span.menu__text Календарь
-      a.menu__item.menu__item--active href="#"
+      = link_to events_path(group: @group,type: 'list'), class: 'menu__item menu__item--active'
         i.menu__icon.fa.fa-list
         span.menu__text Список
       = link_to new_event_path(group: @group), class: 'menu__item menu__item--active'

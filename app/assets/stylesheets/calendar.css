@@ -23,6 +23,10 @@ main {
   padding: 48px;
 }
 
+.event-list {
+  padding-top: 30px
+}
+
 sidebar {
   grid-area: sidebar;
   display: grid;

@@ -1,0 +1,45 @@
+.wrapper
+  .container
+    .row
+      .col-md-8.offset-md-2.col-sm-12.pull-left.posttimeline
+        .panel.panel-default
+          .event-list
+            span.title
+              | События
+            - @events.each do |event|
+              .col-md-12.commentsblock.border-top
+                .media
+                  .media-left
+                    - if @group.avatar.present?
+                      = image_tag(@group.avatar.url, :size => "50x5")
+                    - else
+                      = image_tag('/uploads/missing.jpg', :size => "50x50")
+                  .media-body
+                    h4.media-heading
+                      div
+                        i.fa.fa-clock-o
+                        = " #{event.date.strftime("%F")} #{event.start_at.strftime("%H:%M")} - #{event.end_at.strftime("%H:%M")}"
+                        = link_to event_path(event), method: :delete
+                          .close.i.fa.fa-close
+                    p
+                      = event.description
+            .pagination.justify-content-center = will_paginate @events
+  sidebar
+    .logo = @group.name
+    .avatar
+      .avatar__img
+        - if @group.avatar.present?
+          = image_tag(@group.avatar.url, :size => "100x100")
+        - else
+          = image_tag('/uploads/missing.jpg', :size => "100x100")
+      br
+    nav.menu
+      = link_to events_path(group: @group), class: 'menu__item menu__item--active'
+        i.menu__icon.fa.fa-calendar
+        span.menu__text Календарь
+      = link_to events_path(group: @group,type: 'list'), class: 'menu__item menu__item--active'
+        i.menu__icon.fa.fa-list
+        span.menu__text Список
+      = link_to new_event_path(group: @group), class: 'menu__item menu__item--active'
+        i.menu__icon.fa.fa-plus
+        span.menu__text Создать событие

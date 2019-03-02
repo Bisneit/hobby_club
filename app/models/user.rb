@@ -12,6 +12,7 @@ class User < ApplicationRecord
   enum sex: %i[male female]
 
   def country_name
+    return unless self.country
     country = ISO3166::Country[self.country]
     country.translations['ru'] || country
   end
