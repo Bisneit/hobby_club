@@ -1,58 +1,79 @@
-.group
-  header.business-header
-    .banner
+.wrapper
+  main
+    .group
+      header.business-header
+        .banner
+          .container
+            .row
+              .col-lg-12
+                h1.display-3.text-center.text-white.mt-4 = @group.name
       .container
         .row
-          .col-lg-12
-            h1.display-3.text-center.text-white.mt-4 = @group.name
-  .container
-    .row
-      .col-sm-8
-        h2.mt-4 Чем мы занимаемся
-        p = Rinku.auto_link(@group.description, :all, 'target="_blank"').html_safe
-        - if current_user
-          - if current_user.participants.where(user: current_user, group: @group).blank?
-            = link_to 'Присоединиться', group_participants_path({group_id: @group.id, user_id: current_user.id }), method: :post, class: 'group-invite-button'
-          - else
-            = link_to 'Выйти из группы', group_participant_path(@group), method: :delete, class: 'group-invite-button'
-      .col-sm-4
-        h2.mt-4 Свяжитесь с нами
-        address
-          strong Адрес
-          |  Ударная 20
-        address
-          strong Мы в вконтакте
-          = link_to ' vk.com/vlajkee', "http://vk.com/vlajkee"
-        .group-settings-block
-          - if current_user && current_user.participants.where(user: current_user, group: @group).exists?
-            = link_to 'Участники', group_participants_path(group_id: @group.id), method: :get, class: 'group-participants-button'
-            = link_to 'Cобытия', events_path(group: @group), class: 'group-participants-button'
-            = link_to edit_group_path(@group), class: 'settings-icon'
-              = fa_icon 'cog', class: "fa-3x"
+          .col-sm-8
+            h2.mt-4 Чем мы занимаемся
+            p = Rinku.auto_link(@group.description, :all, 'target="_blank"').html_safe
+            - if current_user
+              - if current_user.participants.where(user: current_user, group: @group).blank?
+                = link_to 'Присоединиться', group_participants_path({group_id: @group.id, user_id: current_user.id }), method: :post, class: 'group-invite-button'
+              - else
+                = link_to 'Выйти из группы', group_participant_path(@group), method: :delete, class: 'group-invite-button'
+          .col-sm-4
+            h2.mt-4 Свяжитесь с нами
+            address
+              strong Адрес
+              |  Ударная 20
+            address
+              strong Мы в вконтакте
+              = link_to ' vk.com/vlajkee', "http://vk.com/vlajkee"
+            .group-settings-block
+              - if current_user && current_user.participants.where(user: current_user, group: @group).exists?
+                = link_to 'Участники', group_participants_path(group_id: @group.id), method: :get, class: 'group-participants-button'
+                = link_to 'Cобытия', events_path(group: @group), class: 'group-participants-button'
+                = link_to edit_group_path(@group), class: 'settings-icon'
+                  = fa_icon 'cog', class: "fa-3x"
+  sidebar
+    .logo = link_to @group.name, group_path(@group)
+    .avatar
+      .avatar__img
+        - if @group.avatar.present?
+          = image_tag(@group.avatar.url, :size => "100x100")
+        - else
+          = image_tag('/uploads/missing_300x300.png', :size => "100x100")
+      br
+    nav.menu
+      = link_to events_path(group: @group), class: 'menu__item menu__item--active'
+        i.menu__icon.fa.fa-calendar
+        span.menu__text Календарь
+      = link_to events_path(group: @group,type: 'list'), class: 'menu__item menu__item--active'
+        i.menu__icon.fa.fa-list
+        span.menu__text Список
+      = link_to new_event_path(group: @group), class: 'menu__item menu__item--active'
+        i.menu__icon.fa.fa-plus
+        span.menu__text Создать событие
 
-    / .row
-    /   .col-sm-4.my-4
-    /     .card
-    /       img.card-img-top alt="" src="http://placehold.it/300x200" /
-    /       .card-body
-    /         h4.card-title Card title
-    /         p.card-text Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sapiente esse necessitatibus neque sequi doloribus.
-    /       .card-footer
-    /         a.btn.btn-primary href="#"  Find Out More!
-    /   .col-sm-4.my-4
-    /     .card
-    /       img.card-img-top alt="" src="http://placehold.it/300x200" /
-    /       .card-body
-    /         h4.card-title Card title
-    /         p.card-text Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sapiente esse necessitatibus neque sequi doloribus totam ut praesentium aut.
-    /       .card-footer
-    /         a.btn.btn-primary href="#"  Find Out More!
-    /   .col-sm-4.my-4
-    /     .card
-    /       img.card-img-top alt="" src="http://placehold.it/300x200" /
-    /       .card-body
-    /         h4.card-title Card title
-    /         p.card-text Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sapiente esse necessitatibus neque.
-    /       .card-footer
-    /         a.btn.btn-primary href="#"  Find Out More!
+        / .row
+        /   .col-sm-4.my-4
+        /     .card
+        /       img.card-img-top alt="" src="http://placehold.it/300x200" /
+        /       .card-body
+        /         h4.card-title Card title
+        /         p.card-text Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sapiente esse necessitatibus neque sequi doloribus.
+        /       .card-footer
+        /         a.btn.btn-primary href="#"  Find Out More!
+        /   .col-sm-4.my-4
+        /     .card
+        /       img.card-img-top alt="" src="http://placehold.it/300x200" /
+        /       .card-body
+        /         h4.card-title Card title
+        /         p.card-text Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sapiente esse necessitatibus neque sequi doloribus totam ut praesentium aut.
+        /       .card-footer
+        /         a.btn.btn-primary href="#"  Find Out More!
+        /   .col-sm-4.my-4
+        /     .card
+        /       img.card-img-top alt="" src="http://placehold.it/300x200" /
+        /       .card-body
+        /         h4.card-title Card title
+        /         p.card-text Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sapiente esse necessitatibus neque.
+        /       .card-footer
+        /         a.btn.btn-primary href="#"  Find Out More!
 

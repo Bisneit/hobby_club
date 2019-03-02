@@ -8,7 +8,7 @@
           - if group.avatar.present?
             = image_tag(group.avatar.url(:medium))
           - else
-            = image_tag('/uploads/missing.jpg')
+            = image_tag('/uploads/missing.png')
       .col-md-5
         h3 = link_to group.name, group_path(group.id)
         .index-group-description = Rinku.auto_link(group.description, :all, 'target="_blank"').html_safe
