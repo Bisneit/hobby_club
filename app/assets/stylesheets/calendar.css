@@ -99,6 +99,9 @@ sidebar {
     margin: 1em 0;
   }
   .avatar__img > img {
+    border-radius: 5%;
+  }
+  .without_avatar__img > img {
     border-radius: 50%;
   }
 }
