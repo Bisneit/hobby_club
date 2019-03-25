@@ -34,6 +34,9 @@ gem 'country_select'
 
 group :development, :test do
   gem 'byebug', platforms: %i[mri mingw x64_mingw]
+  gem 'rspec-rails', '~> 3.8'
+  gem 'factory_bot'
+  gem 'rubocop-rspec'
 end
 
 group :development do

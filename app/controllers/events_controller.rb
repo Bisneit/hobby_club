@@ -15,60 +15,13 @@ class EventsController < ApplicationController
   end
 
   def create
-    errors = false
-    if repeat_params[:type] == 'no'
-      @event = Event.new
-      @event.assign_attributes(event_params)
-      if @event.save
-        flash[:success] = "Событие создано"
-        redirect_back fallback_location: root_path
-      else
-        flash[:notice] = @event.errors.messages.first.last.first
-        redirect_to new_event_path(group: Group.find(event_params[:group_id]))
-      end
-    elsif repeat_params[:type] == 'week'
-      events = []
-      if repeat_params[:repeat_number].blank?
-        flash[:notice] = 'Введите количество повторений'
-        errors = true
-      end
-      if errors || repeat_params[:days]&.reject { |c| c.empty? }.blank?
-        flash[:notice] = 'Выберите дни недели'
-        errors = true
-      end
-      unless errors
-        @event = Event.new
-        @event.assign_attributes(event_params)
-        if !@event.save
-          flash[:notice] = @event.errors.messages.first.last.first
-          errors = true
-        end
-        events << @event
-        created_events = 1
-        last_date = Date.parse(event_params[:date])
-        while !errors && created_events <= (repeat_params[:repeat_number].to_i - 1) do
-          last_date += 1.day
-          if repeat_params[:days].include?(last_date.wday.to_s)
-            created_events +=1
-            @event = Event.new
-            @event.assign_attributes(event_params)
-            @event.date = last_date
-            if !@event.save
-              flash[:notice] = @event.errors.messages.first.last.first
-              errors = true
-              break
-            end
-            events << @event
-          end
-        end
-      end
-      if errors
-        redirect_to new_event_path(group: Group.find(event_params[:group_id]))
-      else
-        Events::Group.create(events: events)
-        flash[:success] = "Событий создано: #{created_events}"
-        redirect_back fallback_location: root_path
-      end
+    result = Events::CreateValidator.new(permitted_params).call
+    if result == 'success'
+      repeat_params[:type] == 'no' ? create_single_event : create_repeatable_event
+      redirect_back fallback_location: root_path
+    else
+      flash[:notice] = result
+      redirect_to new_event_path(group: Group.find(event_params[:group_id]))
     end
   end
 
@@ -122,6 +75,31 @@ class EventsController < ApplicationController
   end
 
   private
+
+  def create_single_event
+    Event.create(event_params)
+    flash[:success] = "Событие создано"
+  end
+
+  def create_repeatable_event
+    events = []
+    @event = Event.create(event_params)
+    events << @event
+    created_events = 1
+    last_date = Date.parse(event_params[:date])
+    while created_events <= (repeat_params[:repeat_number].to_i - 1) do
+      last_date += 1.day
+      if repeat_params[:days].include?(last_date.wday.to_s)
+        created_events +=1
+        @event = Event.new
+        @event.assign_attributes(event_params)
+        @event.date = last_date
+        @event.save
+        events << @event
+      end
+    end
+    flash[:success] = "Событий создано: #{created_events}"
+  end
 
   def permitted_params
     params.require(:event).permit(:description, :date, :start_at, :end_at, :group_id,:type, :repeat_number, :without_weekends, :page, days: [])
