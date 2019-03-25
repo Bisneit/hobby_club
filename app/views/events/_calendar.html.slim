@@ -7,8 +7,8 @@
         = link_to 'След', events_path(date: @param_date.next_month, group: @group), class: 'toggle__option'
       .current-month = "#{I18n.t(:month_names)[@param_date.month]}, #{@param_date.year}"
       .search-input
-        input type="text" value=("What are you looking for?") /
-        i.fa.fa-search
+         input type="text"
+         i.fa.fa-search
     .calendar
       .calendar__header
         div Пн
@@ -61,7 +61,7 @@
     .avatar
       - if @group.avatar.present?
         .avatar__img
-          = image_tag(@group.avatar.url, :size => "125x75")
+          = image_tag(@group.avatar.url(:medium), :size => "125x75")
       - else
         .without_avatar__img
          = image_tag('/uploads/missing_300x300.png', :size => "100x100")

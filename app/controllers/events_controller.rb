@@ -78,8 +78,14 @@ class EventsController < ApplicationController
         redirect_to root_path
       else
         @group = Group.find(params[:group])
-        @events = Event.paginate(page: params[:page], per_page: 10).order(start_at: :desc)
-        render 'events/_list'
+        if @group.participants.where(group: @group, user: current_user).blank?
+          flash[:notice] = 'Вы не можете просматривать события этой группы'
+          redirect_back fallback_location: root_path
+          return
+        else
+          @events = @group.events.paginate(page: params[:page], per_page: 10).order(start_at: :desc)
+          render 'events/_list'
+        end
       end
     else
       @current_date = Date.today
@@ -99,7 +105,7 @@ class EventsController < ApplicationController
           keys = (start_at..end_at).map { |date| date }
           @events = keys.each_with_object({}) do |date, memo|
             memo[date.strftime('%y-%m-%d')] = {
-              events: Event.where(group: @group).where('DATE(date) = ?', date.strftime('%d-%m-%y'))
+              events: @group.events.where('DATE(date) = ?', date.strftime('%d-%m-%y'))
             }
           end
         end

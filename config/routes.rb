@@ -11,6 +11,7 @@ Rails.application.routes.draw do
   resources :users
   resources :posts
   resources :events
+  resources :followers
   resources :groups do
     scope module: :groups do
       resources :participants, controller: :participants

@@ -30,7 +30,7 @@
     .avatar
       - if @group.avatar.present?
         .avatar__img
-          = image_tag(@group.avatar.url, :size => "125x75")
+          = image_tag(@group.avatar.url(:medium), :size => "125x75")
       - else
         .without_avatar__img
          = image_tag('/uploads/missing_300x300.png', :size => "100x100")

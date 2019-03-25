@@ -19,10 +19,10 @@
         .col-lg-3.col-md-4.col-sm-6.portfolio-item
           .card.h-100
             a href="#"
-              img.card-img-top alt="" src="http://placehold.it/700x500" /
+              img.card-img-top[src="https://bootdey.com/img/Content/avatar/avatar6.png" alt=""]
             .card-body
               h4.card-title
-                = link_to [participant.first_name, participant.last_name].join(' '), user_path(id: participant.user.id), method: :get
+                = link_to [participant.first_name, participant.last_name].compact.join(' '), user_path(id: participant.user.id), method: :get
               - if requested
                 .choice
                   = link_to "Принять", group_participant_path(id: participant.id, group_id: group_id, confirm: true),
@@ -30,6 +30,6 @@
                   = link_to "Отклонить", group_participant_path(id: participant.id, group_id: group_id, confirm: false),
                     method: :patch, class: 'simple-btn reject'
               - else
-                p.card-text Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet numquam aspernatur eum quasi sapiente nesciunt?
+                p.card-text = [participant.user.country_name, participant.user.city].compact.join(', ')
 
     .pagination.justify-content-center = will_paginate @participants, renderer: WillPaginate::ActionView::BootstrapLinkRenderer

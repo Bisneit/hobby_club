@@ -7,7 +7,7 @@
             img.userpicimg[src="https://bootdey.com/img/Content/avatar/avatar6.png" alt=""]
           h3.username = [@user.first_name, @user.last_name].join(' ')
           p
-            = [@user.country_name, @user.city].join(', ')
+            = [@user.country_name, @user.city].compact.join(', ')
           .socials.tex-center
             a.btn.btn-circle.btn-primary[href=""]
               i.fa.fa-vk
@@ -17,21 +17,24 @@
           ul.nav.nav-pills.pull-left.countlist[role="tablist"]
             li[role="presentation"]
               h3
-                | 1452
+                = @user.followings.count
                 br
                 small
                   | Подписок
             li[role="presentation"]
               h3
-                | 245
+                = @user.followers.count
                 br
                 small
                   | Подписчиков
           - if @user == current_user
             = link_to 'Редактировать профиль', edit_user_path(@user), class: 'btn btn-primary followbtn'
           - else
-            button.btn.btn-primary.followbtn
-              | Подписаться
+            - following = @user.followers.find_by(follower: current_user)
+            - if following.present?
+              = link_to 'Отписаться', follower_path(following), method: :delete, class: 'btn btn-primary followbtn'
+            - else
+              = link_to 'Подписаться', followers_path(user_id: @user.id), method: :post, class: 'btn btn-primary followbtn'
         .clearfix
     .col-md-4.col-sm-12.pull-right
       .panel.panel-default

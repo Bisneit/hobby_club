@@ -8,6 +8,8 @@ class User < ApplicationRecord
   has_many :profile_posts, class_name: Post.name
   has_many :posts, class_name: Post.name
   has_many :event_participants, class_name: Events::Participant.name
+  has_many :followers, class_name: Follower.name, foreign_key: :followed_id
+  has_many :followings, class_name: Follower.name, foreign_key: :follower_id
 
   enum sex: %i[male female]
 
