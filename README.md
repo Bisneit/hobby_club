@@ -1,24 +1,20 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Hobby Club - шаблон web-портала для творческих и спортивных объединений
 
-Things you may want to cover:
+При развертывании проекта учитывать следующие особенности
 
-* Ruby version
+* Версия Ruby 2.5.0
 
-* System dependencies
+* Версия Postgres > 9.6
 
-* Configuration
+* Система разрабатывалась на Ubuntu 16.04
 
-* Database creation
+* Отсутствуют требования к характеристикам оборудования, на котором запускается проект
 
-* Database initialization
+* Создание базы данных и заполнение необходимыми данными:
+  rake db:create
+  rake db:migrate
+  rake db:seed
 
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+* Для написания тестов используется Rspec. Для их запуска необходимо выполнить команду rspec.
