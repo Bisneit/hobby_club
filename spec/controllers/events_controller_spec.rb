@@ -20,7 +20,7 @@ RSpec.describe EventsController, type: :controller do
         it { expect { subject }.to change { Event.count }.by(1) }
       end
 
-      context 'with non repeatable event' do
+      context 'with repeatable event' do
         let!(:params) { event.attributes.except('id').merge(type: 'week', days: ["", "2","4"], repeat_number: 10) }
 
         it { expect { subject }.to change { Event.count }.by(10) }
